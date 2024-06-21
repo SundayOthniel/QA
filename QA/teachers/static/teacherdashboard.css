@@ -1,0 +1,13 @@
+body {
+    font-family: sans-serif;
+  }
+  
+  .list-group-item {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  h2{
+    margin-top: 70px;
+  }
+  

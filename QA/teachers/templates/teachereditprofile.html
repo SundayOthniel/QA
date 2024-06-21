@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   {% load static %}
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+   <link rel="stylesheet" href="{%static 'base.css'%}">
+   
+</head>
+<body>
+    {%if user.is_authenticated%}
+   {%if messages%}
+   {%for message in messages%}
+   <div class="alert alert-warning alert-dismissabe fade show">
+      <span>{{message}}</span>
+      <button type="button" class="btn-colse" data-bs-dismiss="alert"></button>
+   {%endfor%}
+   {%endif%}
+
+    <section class="form-container">
+        <form method="post">
+            {%csrf_token%}
+            <h3>Update profile</h3>
+            <p>Username <span>*</span></p>
+            <input type="text" name="uname" value="{{user.username}}" placeholder="enter your username" required maxlength="50" class="box">
+            <p>Full Name <span>*</span></p>
+            <input type="text" name="name" value="{{user.name}}" placeholder="enter your name" required maxlength="50" class="box">
+            <p>Teacher or student <span>*</span></p>
+            <input type="radio" {% if user.user_type == 'teacher' %} checked {% endif %} name="user_type" value="teacher" class="box">
+            <input type="radio" {% if user.user_type == 'student' %} checked {% endif %} name="user_type" value="student" class="box">
+            
+
+            <p>Email <span>*</span></p>
+            <input type="email" name="email" value="{{user.email}}" placeholder="enter your email" required maxlength="50" class="box">
+            <input type="submit" value="Update" name="submit" class="btn">
+        </form>
+    </section>
+   <script src="js/script.js"></script>
+   {%endif%}
+</body>
+</html>
